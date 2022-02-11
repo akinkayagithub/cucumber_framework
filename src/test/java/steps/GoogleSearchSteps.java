@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -49,5 +50,13 @@ public class GoogleSearchSteps{
         String resultText = googleSearchResultPage.searchResults.getText();
         long actualIntResult = Long.parseLong(resultText.substring(resultText.indexOf(" ")+1, resultText.indexOf("results")-1).replace(",", ""));
         Assert.assertTrue(actualIntResult > results);
+    }
+
+    @Then("user should see below links")
+    public void userShouldSeeBelowLinks(DataTable dataTable) {
+        for (int i = 0; i < dataTable.asList().size(); i++) {
+            Assert.assertTrue(googleSearchPage.links.get(i).isDisplayed());
+            Assert.assertEquals(dataTable.asList().get(i), googleSearchPage.links.get(i).getText());
+        }
     }
 }

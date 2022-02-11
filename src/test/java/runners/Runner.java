@@ -8,10 +8,11 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@Search",
+        tags = "",
         plugin = {"html:target/cucumber.reports",
                 "json:target/cucumber.json"},
-        dryRun = false
+        dryRun = false,
+        monochrome = true
 )
 
 public class Runner {
